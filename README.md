@@ -31,4 +31,4 @@ pip install torch scikit-learn scanpy
 ```
 
 ## Tutorial
-For a complete usage example pleae refer to **Tutorial** folder in this GitHub repository, you can directly access it from [here.]()
+For a complete usage example pleae refer to **Tutorial** folder in this GitHub repository, you can directly access it from [here.](https://github.com/msmalmir/scTransID/tree/main/Tutorial)
