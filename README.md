@@ -17,3 +17,22 @@ To install the latest version directly from GitHub, use the following command:
 ```
 pip install git+https://github.com/your-username/scTransID.git
 ```
+
+## Modules
+
+- **data_utils**: Functions for loading, preprocessing, and splitting single-cell data.
+- **model**: Defines the Transformer model and its custom layers, including multi-head attention and layer normalization.
+- **train**: Contains the training function for model optimization and validation.
+- **evaluation**: Functions for evaluating the model on query datasets.
+
+## Requirements
+
+- Python 3.7+
+- PyTorch
+- scikit-learn
+- scanpy
+
+Install these dependencies via `pip`:
+
+```bash
+pip install torch scikit-learn scanpy
