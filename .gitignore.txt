@@ -1,0 +1,5 @@
+# Ignore Python cache and egg-info files
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
