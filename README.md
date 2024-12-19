@@ -2,7 +2,7 @@
 
 **scTransID** is a Python package designed for single-cell RNA sequencing data classification using a custom Transformer model. The package provides functions for data preprocessing, model training, and evaluation to streamline the process of analyzing cell type classification.
 
-![](images/scTransID_overview.jpg)
+![](Images/scTransID_overview.jpg)
 
 
 ## Installation
