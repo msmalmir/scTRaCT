@@ -58,7 +58,7 @@ class ResidualConnection(nn.Module):
 # Main model with custom attention and feedforward layers
 # Main model with custom attention and feedforward layers
 class TransformerModel(nn.Module):
-    def __init__(self, num_genes, num_classes, num_heads=12, dim_feedforward=256, dropout=0.3, embedding_dim=480):
+    def __init__(self, num_genes, num_classes, num_heads=12, dim_feedforward=1920, dropout=0.3, embedding_dim=480):
         super(TransformerModel, self).__init__()
         
         # Ensure embedding_dim is divisible by num_heads
