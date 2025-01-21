@@ -8,9 +8,9 @@ def load_data(train_path, test_path):
     query_adata = sc.read_h5ad(test_path)
     return train_adata, query_adata
 
-def preprocess_data(train_adata, query_adata):
+def preprocess_data(train_adata, query_adata, cell_type_key):
     le = LabelEncoder()
-    y_train = le.fit_transform(train_adata.obs['celltype'])
+    y_train = le.fit_transform(train_adata.obs[cell_type_key])
     X_train = train_adata.X.A if hasattr(train_adata.X, "A") else train_adata.X
     X_query = query_adata.X.A if hasattr(query_adata.X, "A") else query_adata.X
     return X_train, y_train, X_query, le
