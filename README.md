@@ -10,7 +10,7 @@
 To install the latest version directly from GitHub, use the following command:
 
 ```
-pip install git+https://github.com/your-username/scTransID.git
+pip install git+https://github.com/msmalmir/scTransID.git
 ```
 
 ## Data Input
