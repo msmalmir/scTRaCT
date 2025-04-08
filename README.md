@@ -1,10 +1,15 @@
-# scTransID v0.1.0
+# scTRaCT v0.1.0
 
-**scTRaCT** is a Python package designed for single-cell RNA sequencing data classification using a custom Transformer model. The package provides functions for data preprocessing, model training, and evaluation to streamline the process of analyzing cell type classification.
+**scTRaCT** is a supervised transformer-based deep learning framework that integrates log-normalized gene expression with complementary distance-based features derived from Multiple Correspondence Analysis (MCA). By transforming continuous expression data into a metric that quantifies the association between genes and cells, scTRaCT enriches the input representation, capturing subtle transcriptional differences that are critical for distinguishing closely related cell types. Processed through a Transformer-based architecture with self-attention mechanisms, our model effectively learns long-range dependencies and complex gene interactions
 
 ![](Images/scTransID_overview.jpg)
 
 
+
+
+
+
+<!-- 
 ## Installation
 
 To install the latest version directly from GitHub, use the following command:
@@ -33,4 +38,4 @@ pip install torch scikit-learn scanpy
 ```
 
 ## Tutorial
-For a complete usage example pleae refer to **Tutorial** folder in this GitHub repository, you can directly access it from [here.](https://github.com/msmalmir/scTransID/tree/main/Tutorial)
+For a complete usage example pleae refer to **Tutorial** folder in this GitHub repository, you can directly access it from [here.](https://github.com/msmalmir/scTransID/tree/main/Tutorial) -->
