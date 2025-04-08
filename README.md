@@ -1,6 +1,6 @@
 # scTransID v0.1.0
 
-**scTransID** is a Python package designed for single-cell RNA sequencing data classification using a custom Transformer model. The package provides functions for data preprocessing, model training, and evaluation to streamline the process of analyzing cell type classification.
+**scTRaCT** is a Python package designed for single-cell RNA sequencing data classification using a custom Transformer model. The package provides functions for data preprocessing, model training, and evaluation to streamline the process of analyzing cell type classification.
 
 ![](Images/scTransID_overview.jpg)
 
