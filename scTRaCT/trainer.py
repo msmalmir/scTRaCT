@@ -36,7 +36,7 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, num_epoch
         train_f1 = f1_score(y_true, y_pred, average="macro")
 
         # Print nicely
-        print(f"\n[ Train | {epoch:03d}/{num_epochs:03d} ] loss = {avg_loss:.5f}, acc = {train_acc:.5f}, f1 = {train_f1:.5f}")
+        print(f"[ Train | {epoch:03d}/{num_epochs:03d} ] loss = {avg_loss:.5f}, acc = {train_acc:.5f}, f1 = {train_f1:.5f}")
 
         # Save checkpoint
         if epoch % save_every == 0:
