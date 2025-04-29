@@ -1,55 +1,49 @@
 import torch
 import os
+from tqdm import tqdm
+from sklearn.metrics import accuracy_score, f1_score
 
-def train_model(
-    model, train_loader, val_loader, 
-    criterion, optimizer, num_epochs=50, 
-    save_dir="./", save_every=10, save_name="model_checkpoint"
-):
-    device = next(model.parameters()).device
-    best_val_loss = float("inf")
-
+def train_model(model, train_loader, val_loader, criterion, optimizer, num_epochs=50, save_every=10, save_dir="saved_models", save_name="scTRaCT_checkpoint"):
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    
     os.makedirs(save_dir, exist_ok=True)
 
-    for epoch in range(num_epochs):
+    for epoch in range(1, num_epochs + 1):
         model.train()
-        running_loss = 0.0
-        for X_counts_batch, X_dist_batch, y_batch in train_loader:
+        total_loss = 0
+        y_true = []
+        y_pred = []
+
+        loop = tqdm(train_loader, leave=False, desc=f"Training Epoch {epoch}")
+        for X_counts_batch, X_dist_batch, y_batch in loop:
             X_counts_batch, X_dist_batch, y_batch = X_counts_batch.to(device), X_dist_batch.to(device), y_batch.to(device)
+
             optimizer.zero_grad()
             outputs = model(X_counts_batch, X_dist_batch)
             loss = criterion(outputs, y_batch)
             loss.backward()
             optimizer.step()
-            running_loss += loss.item()
 
-        model.eval()
-        val_loss = 0.0
-        correct = 0
-        total = 0
-        with torch.no_grad():
-            for X_counts_val, X_dist_val, y_val_batch in val_loader:
-                X_counts_val, X_dist_val, y_val_batch = X_counts_val.to(device), X_dist_val.to(device), y_val_batch.to(device)
-                outputs = model(X_counts_val, X_dist_val)
-                loss = criterion(outputs, y_val_batch)
-                val_loss += loss.item()
-                _, predicted = torch.max(outputs, 1)
-                total += y_val_batch.size(0)
-                correct += (predicted == y_val_batch).sum().item()
+            total_loss += loss.item()
 
-        avg_train_loss = running_loss / len(train_loader)
-        avg_val_loss = val_loss / len(val_loader)
-        val_accuracy = 100 * correct / total
+            preds = outputs.argmax(dim=1)
+            y_true.extend(y_batch.cpu().numpy())
+            y_pred.extend(preds.cpu().numpy())
 
-        print(f"Epoch {epoch+1}/{num_epochs}, Train Loss: {avg_train_loss:.4f}, Val Loss: {avg_val_loss:.4f}, Val Acc: {val_accuracy:.2f}%")
+        # Calculate metrics
+        avg_loss = total_loss / len(train_loader)
+        train_acc = accuracy_score(y_true, y_pred)
+        train_f1 = f1_score(y_true, y_pred, average="macro")
+
+        # Print nicely
+        print(f"\n[ Train | {epoch:03d}/{num_epochs:03d} ] loss = {avg_loss:.5f}, acc = {train_acc:.5f}, f1 = {train_f1:.5f}")
 
         # Save checkpoint
-        if save_every > 0 and (epoch + 1) % save_every == 0:
-            save_path = os.path.join(save_dir, f"{save_name}_epoch{epoch+1}.pth")
+        if epoch % save_every == 0:
+            save_path = os.path.join(save_dir, f"{save_name}_epoch{epoch}.pth")
             torch.save(model.state_dict(), save_path)
             print(f"Model saved at {save_path}")
 
-    print("Training complete.")
 
 def evaluate_model(model, test_loader, label_encoder):
     device = next(model.parameters()).device
@@ -67,8 +61,6 @@ def evaluate_model(model, test_loader, label_encoder):
 
     all_preds = torch.cat(all_preds)
     all_labels = torch.cat(all_labels)
-
-    from sklearn.metrics import accuracy_score, f1_score
 
     acc = accuracy_score(all_labels.numpy(), all_preds.numpy())
     f1 = f1_score(all_labels.numpy(), all_preds.numpy(), average="macro")
