@@ -1,22 +1,22 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='scTransID',
-    version='0.1',
-    description='A Python package for cell type classification using Transformer models',
-    author='Mostafa Malmir',
-    author_email='malmir.edumail@gmail.com',
-    url='https://https://github.com/msmalmir/scTransID',
+    name="scTRaCT",
+    version="0.1.0",
+    description="A Python package for cell type classification using Transformer models.",
+    author="Mostafa Malmir",
+    author_email="malmir.edumail@gmail.com",
     packages=find_packages(),
     install_requires=[
-        'torch',
-        'scanpy',
-        'numpy',
-        'pandas',
-        'scikit-learn',
-        'matplotlib',
-        'seaborn'
+        "torch>=2.0",
+        "scanpy>=1.9",
+        "scikit-learn>=1.0",
+        "numpy",
+        "pandas",
+        "scipy",
+        "anndata",
     ],
-    python_requires='>=3.6',
+    python_requires=">=3.7",
+    include_package_data=True,
+    license="MIT",
 )
-

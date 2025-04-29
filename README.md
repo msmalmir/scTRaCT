@@ -7,6 +7,21 @@
 
 
 ## Installation
+you caninstall the scTRaCT package following next steps: 
+
+```
+pip install git+https://github.com/yourusername/scTRaCT.git
+```
+OR
+
+```
+git clone https://github.com/msmalmir/scTRaCT.git
+cd scTRaCT
+pip install 
+```
+
+## Usage
+After installing the package you need to prepare your dataset to feed into the model. As scTRaCT is working only with HVGs please use the preprocessed.py to filter your dataset 
 
 
 <!-- 
