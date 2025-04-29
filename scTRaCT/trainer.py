@@ -3,6 +3,7 @@ import os
 from tqdm import tqdm
 from sklearn.metrics import accuracy_score, f1_score
 from torch.utils.data import DataLoader, TensorDataset
+from scipy.sparse import issparse
 
 def train_model(model, train_loader, val_loader, criterion, optimizer, num_epochs=50, save_every=10, save_dir="saved_models", save_name="scTRaCT_checkpoint"):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -66,7 +67,10 @@ def evaluate_model(model, test_loader, label_encoder):
     acc = accuracy_score(all_labels.numpy(), all_preds.numpy())
     f1 = f1_score(all_labels.numpy(), all_preds.numpy(), average="macro")
     
-    return acc, f1
+    # Convert predictions back to cell type names
+    predicted_celltypes = label_encoder.inverse_transform(all_preds.numpy())
+
+    return acc, f1, predicted_celltypes
 
 
 
@@ -111,7 +115,9 @@ def evaluate_on_query(
     query_adata = adata[adata.obs[is_train_key] != 'train'].copy()
 
     X_counts_query = query_adata.layers[lognorm_layer].toarray()
-    X_dist_query = query_adata.layers[distance_layer].copy()
+    X_dist_query = query_adata.layers[distance_layer]
+    if hasattr(X_dist_query, "toarray"):
+        X_dist_query = X_dist_query.toarray()
 
     epsilon = 1e-6
     X_dist_query = 1 / (X_dist_query + epsilon)
@@ -147,9 +153,10 @@ def evaluate_on_query(
     model = model.to(device)
 
     # Evaluate
-    acc, f1 = evaluate_model(model, query_loader, label_encoder)
+    acc, f1, predicted_celltypes = evaluate_model(model, query_loader, label_encoder)
+
 
     print(f"Test/Query Set Accuracy: {acc:.4f}")
     print(f"Test/Query Set F1 Score: {f1:.4f}")
 
-    return acc, f1
+    return acc, f1, predicted_celltypes
