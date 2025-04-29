@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 import scanpy as sc
 from .mca_utils import RunMCA, GetDistances
-
+from scipy.sparse import issparse
 
 def prepare_data(adata, lognorm_layer="lognorm", distance_layer="distance_matrix", 
                  cell_type_key="cell_type", is_train_key="is_train", j=30):
@@ -45,7 +45,11 @@ def prepare_data(adata, lognorm_layer="lognorm", distance_layer="distance_matrix
     
     # Features
     X_counts = train_adata.layers[lognorm_layer].toarray()
-    X_dist = train_adata.layers[distance_layer].toarray()
+    
+    if issparse(train_adata.layers[distance_layer]):
+        X_dist = train_adata.layers[distance_layer].toarray()
+    else:
+        X_dist = train_adata.layers[distance_layer]
 
     # Inverse of distance
     epsilon = 1e-6
