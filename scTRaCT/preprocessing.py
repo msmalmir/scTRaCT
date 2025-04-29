@@ -1,9 +1,11 @@
 import torch
 import numpy as np
+import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 import scanpy as sc
 from .mca_utils import RunMCA, GetDistances
+
 
 def prepare_data(adata, lognorm_layer="lognorm", distance_layer="distance_matrix", 
                  cell_type_key="cell_type", is_train_key="is_train", j=30):
