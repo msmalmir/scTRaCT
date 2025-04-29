@@ -45,7 +45,7 @@ def prepare_data(adata, lognorm_layer="lognorm", distance_layer="distance_matrix
     
     # Features
     X_counts = train_adata.layers[lognorm_layer].toarray()
-    
+
     if issparse(train_adata.layers[distance_layer]):
         X_dist = train_adata.layers[distance_layer].toarray()
     else:
