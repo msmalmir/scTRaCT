@@ -10,7 +10,7 @@
 you caninstall the scTRaCT package following next steps: 
 
 ```
-pip install git+https://github.com/yourusername/scTRaCT.git
+pip install git+https://github.com/msmalmir/scTRaCT.git
 ```
 OR
 
