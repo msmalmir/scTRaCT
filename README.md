@@ -2,7 +2,7 @@
 
 **scTRaCT** is a supervised transformer-based deep learning framework that integrates log-normalized gene expression with complementary distance-based features derived from Multiple Correspondence Analysis (MCA). By transforming continuous expression data into a metric that quantifies the association between genes and cells, scTRaCT enriches the input representation, capturing subtle transcriptional differences that are critical for distinguishing closely related cell types. Processed through a Transformer-based architecture with self-attention mechanisms, our model effectively learns long-range dependencies and complex gene interactions
 
-![](Images/scTRaCT_overview.jpg)
+![](Images/scTRaCT_overview.png)
 
 ---
 
