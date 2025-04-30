@@ -6,7 +6,6 @@
 
 ---
 
-
 ##  Key Features
 
 -  Combines log-normalized gene expression with MCA-based distance features.
@@ -39,6 +38,7 @@ git clone https://github.com/msmalmir/scTRaCT.git
 cd scTRaCT
 pip install 
 ```
+---
 
 ## Usage
 ### Step 1: Prepare Input Data
@@ -95,11 +95,12 @@ query_adata, acc, f1, predictions = predict_query(
     prediction_key="predicted_celltypes"
 )
 ```
-
+---
 
 ## Tutorial
 For a complete usage example pleae refer to **Tutorial** folder in this GitHub repository, you can directly access it from [here.](https://github.com/msmalmir/scTransID/tree/main/Tutorial)
 
+---
 
 ## Output
 - Saved model checkpoints in the saved_models/ directory
@@ -108,13 +109,20 @@ For a complete usage example pleae refer to **Tutorial** folder in this GitHub r
 
 - Updated query_adata object with predicted labels
 
+---
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](https://github.com/msmalmir/scTransID/tree/main/LICENSE.txt) file for more details.
 
+---
 
 ## Acknowledgements
 scTRaCT builds on top of widely-used libraries like `Scanpy`, `PyTorch`, and `AnnData`.
 
+---
+
 ## Contact
 For questions, feature requests, or bug reports, please open an issue or contact the repository maintainer at [malmir.edumail@gmail.com].
+
+---
