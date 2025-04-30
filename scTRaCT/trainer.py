@@ -159,4 +159,4 @@ def evaluate_on_query(
     print(f"Test/Query Set Accuracy: {acc:.4f}")
     print(f"Test/Query Set F1 Score: {f1:.4f}")
 
-    return acc, f1, predicted_celltypes
+    return acc, f1, predicted_celltypes, query_adata
